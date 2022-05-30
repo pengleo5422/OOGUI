@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "482380779282",
+    "project_id": "wristband-b834c",
+    "storage_bucket": "wristband-b834c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:482380779282:android:c9c6e0173da4c4d4152dcb",
+        "android_client_info": {
+          "package_name": "com.example.myapplication"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "482380779282-7ekecssgtok2o1u0leqmuo44uoj77b8m.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.myapplication",
+            "certificate_hash": "9ee6c7b96d588be9104290a1ca737f64b2a240a5"
+          }
+        },
+        {
+          "client_id": "482380779282-bht7t8eibld72pqsjcju62c6q13opo90.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCKcYm2NcSabqx5nCuttVzSq4TUO6C1DO8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "482380779282-bht7t8eibld72pqsjcju62c6q13opo90.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
