@@ -27,25 +27,37 @@
             android:id="@+id/calendarView"
             android:layout_width="match_parent"
             android:layout_height="301dp"
-            android:layout_marginBottom="30dp"></CalendarView>
+            android:layout_marginBottom="30dp" ></CalendarView>
+
+        <TextView
+            android:layout_width="179dp"
+            android:layout_height="20dp"
+            android:text="@string/sedate"
+            android:layout_marginStart="35dp"
+            android:textColor="#59bb9b"
+            android:textSize="15sp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/myDate"
             android:layout_width="179dp"
             android:layout_height="57dp"
-            android:layout_marginLeft="120dp"
-            android:text=" Date"
+            android:textColor="	#46A3FF"
+            android:text="@string/date"
+            android:layout_gravity="center"
+            android:textStyle="bold"
             android:textAlignment="center"
-            android:textColor="@color/design_default_color_primary"
+
             android:textSize="23sp" />
 
         <Button
             android:id="@+id/button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="160dp"
-            android:background="@drawable/dg_btn"
-            android:text="確定"
+            android:layout_gravity="center"
+            android:background="@drawable/button"
+            android:text="@string/sure"
+            android:textStyle="bold"
             tools:layout_editor_absoluteX="11dp"
             tools:layout_editor_absoluteY="476dp" />
 
@@ -53,3 +65,4 @@
 
 
 </LinearLayout>
+

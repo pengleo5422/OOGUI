@@ -42,7 +42,7 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View view){
                 EditText account = LoginActivity.this.findViewById(R.id.account);
                 EditText password = LoginActivity.this.findViewById(R.id.password);
-                if(account.getText().toString().equals("user") && password.getText().toString().equals("123456")){
+                if(1==1/*account.getText().toString().equals("user") && password.getText().toString().equals("123456")*/){
                     //Toast.makeText(LoginActivity.this,"帳號密碼正確",Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(LoginActivity.this, MainActivity.class));
                 }

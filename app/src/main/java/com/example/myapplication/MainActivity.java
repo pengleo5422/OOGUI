@@ -45,23 +45,22 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 
-public class MainActivity extends AppCompatActivity  {
+public class MainActivity extends AppCompatActivity {
 
-    private ActivityMainBinding binding;
-
-
-    String date,year,month,result;
+    private static final String TAG = "MainActivity";
+    private static String JSON_URL = "http://172.20.10.2:3000/";
+    String date, year, month, result;
     int day;
     String dateString;
-    private static String JSON_URL = "http://172.20.10.2:3000/";
-    ArrayList<HashMap<String,String>> friendsList;
-    private static final String TAG = "MainActivity";
-    private LineChart mChart;
+    ArrayList<HashMap<String, String>> friendsList;
     int week1 = 0;
     int week2 = 0;
     int week3 = 0;
     int week4 = 0;
     int week5 = 0;
+    private ActivityMainBinding binding;
+    private LineChart mChart;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -81,7 +80,7 @@ public class MainActivity extends AppCompatActivity  {
         navController.addOnDestinationChangedListener(new NavController.OnDestinationChangedListener() {
             @Override
             public void onDestinationChanged(@NonNull NavController navController, @NonNull NavDestination navDestination, @Nullable Bundle bundle) {
-                if(navDestination.getId() == R.id.navigation_dashboard) {
+                if (navDestination.getId() == R.id.navigation_dashboard) {
                     Intent intent = new Intent(MainActivity.this, com.example.myapplication.ui.dashboard.calendar.class);
                     startActivity(intent);
                 } else {
@@ -94,7 +93,7 @@ public class MainActivity extends AppCompatActivity  {
 
     }
 
-    public void openAboutHistory(View view){
+    public void openAboutHistory(View view) {
         Intent intent = new Intent(this, watchHistory.class);
         startActivity(intent);
     }
@@ -102,8 +101,8 @@ public class MainActivity extends AppCompatActivity  {
     public class GetData extends AsyncTask<String, String, String> {
 
         @Override
-        protected String doInBackground(String... string){
-            String current ="";
+        protected String doInBackground(String... string) {
+            String current = "";
             try {
                 URL url;
                 HttpURLConnection urlConnection = null;
@@ -130,23 +129,23 @@ public class MainActivity extends AppCompatActivity  {
                         urlConnection.disconnect();
                     }
                 }
-            }
-            catch(Exception e){
+            } catch (Exception e) {
                 e.printStackTrace();
             }
             return current;
         }
+
         @Override
-        protected void onPostExecute(String s){
-            try{
+        protected void onPostExecute(String s) {
+            try {
                 Calendar calendar = Calendar.getInstance();
-                String thisMonth = String.valueOf(calendar.get(Calendar.MONTH)+1);
+                String thisMonth = String.valueOf(calendar.get(Calendar.MONTH) + 1);
                 String thisYear = String.valueOf(calendar.get(Calendar.YEAR));
-                Log.d("month",thisYear+"/"+thisMonth);
+                Log.d("month", thisYear + "/" + thisMonth);
 
                 JSONObject jsonObject = new JSONObject(s);
                 JSONArray jsonArray = jsonObject.getJSONArray("parkinson");
-                for(int i = 0; i<jsonArray.length();i++){
+                for (int i = 0; i < jsonArray.length(); i++) {
                     JSONObject jsonObject1 = jsonArray.getJSONObject(i);
                     date = jsonObject1.getString("date");
                     String[] parts = date.split("/");
@@ -156,20 +155,16 @@ public class MainActivity extends AppCompatActivity  {
                     result = jsonObject1.getString("result");
 
                     // Hashmap
-                    if(result.equals("有異狀")&&year.equals(thisYear)&&month.equals(thisMonth)){
-                        if(1<=day && day<=7){
+                    if (result.equals("有異狀") && year.equals(thisYear) && month.equals(thisMonth)) {
+                        if (1 <= day && day <= 7) {
                             week1 = week1 + 1;
-                        }
-                        else if(8<=day && day<=14){
+                        } else if (8 <= day && day <= 14) {
                             week2 = week2 + 1;
-                        }
-                        else if(15<=day && day<=21){
+                        } else if (15 <= day && day <= 21) {
                             week3 = week3 + 1;
-                        }
-                        else if(22<=day && day<=28){
+                        } else if (22 <= day && day <= 28) {
                             week4 = week4 + 1;
-                        }
-                        else if(29<=day){
+                        } else if (29 <= day) {
                             week5 = week5 + 1;
                         }
 
@@ -180,12 +175,12 @@ public class MainActivity extends AppCompatActivity  {
                 mChart.setScaleEnabled(false);
                 ArrayList<Entry> yValues = new ArrayList<Entry>();
                 int a = 1;
-                yValues.add(new Entry(0,week1));
-                yValues.add(new Entry(1,week2));
-                yValues.add(new Entry(2,week3));
-                yValues.add(new Entry(3,week4));
+                yValues.add(new Entry(0, week1));
+                yValues.add(new Entry(1, week2));
+                yValues.add(new Entry(2, week3));
+                yValues.add(new Entry(3, week4));
                 //yValues.add(new Entry(4,week5));
-                LineDataSet set1 = new LineDataSet(yValues,"Data Set 1");
+                LineDataSet set1 = new LineDataSet(yValues, "Data Set 1");
                 set1.setFillAlpha(110);
                 set1.setColor(Color.RED);
                 set1.setDrawFilled(true);
