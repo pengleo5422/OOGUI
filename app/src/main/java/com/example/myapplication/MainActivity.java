@@ -1,17 +1,20 @@
 package com.example.myapplication;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
-import android.widget.ListAdapter;
-import android.widget.ListView;
-import android.widget.SimpleAdapter;
-import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
+import androidx.navigation.ui.AppBarConfiguration;
+import androidx.navigation.ui.NavigationUI;
+
+import com.example.myapplication.databinding.ActivityMainBinding;
 import com.example.myapplication.ui.dashboard.watchHistory;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.data.Entry;
@@ -19,17 +22,6 @@ import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.navigation.NavController;
-import androidx.navigation.NavDestination;
-import androidx.navigation.Navigation;
-import androidx.navigation.ui.AppBarConfiguration;
-import androidx.navigation.ui.NavigationUI;
-
-import com.example.myapplication.databinding.ActivityMainBinding;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -39,7 +31,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -48,7 +39,7 @@ import java.util.HashMap;
 public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "MainActivity";
-    private static String JSON_URL = "http://172.20.10.2:3000/";
+    private static final String JSON_URL = "http://172.20.10.2:3000/";
     String date, year, month, result;
     int day;
     String dateString;
@@ -58,36 +49,29 @@ public class MainActivity extends AppCompatActivity {
     int week3 = 0;
     int week4 = 0;
     int week5 = 0;
-    private ActivityMainBinding binding;
-    private LineChart mChart;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        binding = ActivityMainBinding.inflate(getLayoutInflater());
+        com.example.myapplication.databinding.ActivityMainBinding binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         friendsList = new ArrayList<>();
         GetData getData = new GetData();
         getData.execute();
         BottomNavigationView navView = findViewById(R.id.nav_view);
+        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_main);
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.navigation_home, R.id.navigation_dashboard)
                 .build();
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_main);
+
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(binding.navView, navController);
-        navController.addOnDestinationChangedListener(new NavController.OnDestinationChangedListener() {
-            @Override
-            public void onDestinationChanged(@NonNull NavController navController, @NonNull NavDestination navDestination, @Nullable Bundle bundle) {
-                if (navDestination.getId() == R.id.navigation_dashboard) {
-                    Intent intent = new Intent(MainActivity.this, com.example.myapplication.ui.dashboard.calendar.class);
-                    startActivity(intent);
-                } else {
-
-                }
+        navController.addOnDestinationChangedListener((navController1, navDestination, bundle) -> {
+            if (navDestination.getId() == R.id.navigation_dashboard) {
+                Intent intent = new Intent(MainActivity.this, com.example.myapplication.ui.dashboard.calendar.class);
+                startActivity(intent);
             }
-
         });
 
 
@@ -98,6 +82,8 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+
+    @SuppressLint("StaticFieldLeak")
     public class GetData extends AsyncTask<String, String, String> {
 
         @Override
@@ -114,14 +100,12 @@ public class MainActivity extends AppCompatActivity {
                     InputStreamReader isr = new InputStreamReader(in);
                     int data = isr.read();
                     while (data != -1) {
-                        current += (char) data;
+                        current = current.concat(String.valueOf((char) data));
                         data = isr.read();
 
                     }
                     return current;
 
-                } catch (MalformedURLException e) {
-                    e.printStackTrace();
                 } catch (IOException e) {
                     e.printStackTrace();
                 } finally {
@@ -170,11 +154,11 @@ public class MainActivity extends AppCompatActivity {
 
                     }
                 }
-                mChart = (LineChart) findViewById(R.id.linechart);
+                LineChart mChart = (LineChart) findViewById(R.id.linechart);
                 mChart.setDragEnabled(true);
                 mChart.setScaleEnabled(false);
-                ArrayList<Entry> yValues = new ArrayList<Entry>();
-                int a = 1;
+                ArrayList<Entry> yValues = new ArrayList<>();
+                //int a = 1;
                 yValues.add(new Entry(0, week1));
                 yValues.add(new Entry(1, week2));
                 yValues.add(new Entry(2, week3));
