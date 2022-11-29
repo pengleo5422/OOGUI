@@ -1,7 +1,6 @@
 package com.example.myapplication.ui.dashboard;
 
-import androidx.appcompat.app.AppCompatActivity;
-
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -9,7 +8,8 @@ import android.util.Log;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
-import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.myapplication.R;
 
@@ -21,7 +21,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -34,7 +33,7 @@ public class watchHistory extends AppCompatActivity {
     String date,year,month,result;
     int day;
     String dateString;
-    private static String JSON_URL = "http://172.20.10.2:3000/";
+    private static final String JSON_URL = "http://172.20.10.2:3000/";
     ArrayList<HashMap<String,String>> resultList;
     @Override
     protected void onCreate(Bundle savedInstanceState)   {
@@ -50,11 +49,12 @@ public class watchHistory extends AppCompatActivity {
         getData.execute();
     }
 
+    @SuppressLint("StaticFieldLeak")
     public class GetData extends AsyncTask<String, String, String> {
 
         @Override
         protected String doInBackground(String... string){
-            String current ="";
+            StringBuilder current = new StringBuilder();
             try {
                 URL url;
                 HttpURLConnection urlConnection = null;
@@ -66,14 +66,12 @@ public class watchHistory extends AppCompatActivity {
                     InputStreamReader isr = new InputStreamReader(in);
                     int data = isr.read();
                     while (data != -1) {
-                        current += (char) data;
+                        current.append((char) data);
                         data = isr.read();
 
                     }
-                    return current;
+                    return current.toString();
 
-                } catch (MalformedURLException e) {
-                    e.printStackTrace();
                 } catch (IOException e) {
                     e.printStackTrace();
                 } finally {
@@ -85,7 +83,7 @@ public class watchHistory extends AppCompatActivity {
             catch(Exception e){
                 e.printStackTrace();
             }
-            return current;
+            return current.toString();
         }
         @Override
         protected void onPostExecute(String s){

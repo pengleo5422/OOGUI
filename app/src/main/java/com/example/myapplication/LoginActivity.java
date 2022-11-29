@@ -2,31 +2,23 @@ package com.example.myapplication;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.Editable;
 import android.text.InputFilter;
-import android.text.Spanned;
-import android.text.TextWatcher;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 public class LoginActivity extends AppCompatActivity {
     private EditText editText;
-    private String blockCharacterSet = "~#^|@$%&*!";
+    private final String blockCharacterSet = "~#^|@$%&*!";
 
-    private InputFilter filter = new InputFilter() {
-        @Override
-        public CharSequence filter(CharSequence source, int start, int end, Spanned dest, int dstart, int dend) {
+    private final InputFilter filter = (source, start, end, dest, dstart, dend) -> {
 
-            if (source != null && blockCharacterSet.contains(("" + source))) {
-                return "";
-            }
-            return null;
+        if (source != null && blockCharacterSet.contains(("" + source))) {
+            return "";
         }
+        return null;
     };
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,18 +29,15 @@ public class LoginActivity extends AppCompatActivity {
         editText = (EditText) findViewById(R.id.account);
         editText.setFilters(new InputFilter[] { filter });
 
-        login.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View view){
-                EditText account = LoginActivity.this.findViewById(R.id.account);
-                EditText password = LoginActivity.this.findViewById(R.id.password);
-                if(account.getText().toString().equals("user") && password.getText().toString().equals("123456")){
-                    //Toast.makeText(LoginActivity.this,"帳號密碼正確",Toast.LENGTH_SHORT).show();
-                    startActivity(new Intent(LoginActivity.this, MainActivity.class));
-                }
-                else{
-                    Toast.makeText(LoginActivity.this,"帳號密碼錯誤",Toast.LENGTH_SHORT).show();
-                }
+        login.setOnClickListener(view -> {
+            EditText account1 = LoginActivity.this.findViewById(R.id.account);
+            EditText password = LoginActivity.this.findViewById(R.id.password);
+            if(1==1/*account.getText().toString().equals("user") && password.getText().toString().equals("123456")*/){
+                //Toast.makeText(LoginActivity.this,"帳號密碼正確",Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(LoginActivity.this, MainActivity.class));
+            }
+            else{
+                Toast.makeText(LoginActivity.this,"帳號密碼錯誤",Toast.LENGTH_SHORT).show();
             }
         });
     }
