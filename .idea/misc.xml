@@ -9,12 +9,18 @@
         <entry key="..\:/Users/USER/OOGUI/app/src/main/res/drawable/dg_btn.xml" value="0.1485" />
         <entry key="..\:/Users/USER/OOGUI/app/src/main/res/drawable/dg_calen.xml" value="0.1485" />
         <entry key="..\:/Users/USER/OOGUI/app/src/main/res/drawable/ic_baseline_account_circle_24.xml" value="0.1" />
+        <entry key="..\:/Users/USER/OOGUI/app/src/main/res/drawable/ic_baseline_lock_open_24.xml" value="0.1" />
         <entry key="..\:/Users/USER/OOGUI/app/src/main/res/drawable/ic_dashboard_black_24dp.xml" value="0.1485" />
         <entry key="..\:/Users/USER/OOGUI/app/src/main/res/drawable/ic_home_black_24dp.xml" value="0.1485" />
         <entry key="..\:/Users/USER/OOGUI/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1485" />
         <entry key="..\:/Users/USER/OOGUI/app/src/main/res/drawable/ic_launcher_foreground.xml" value="0.1485" />
+        <entry key="..\:/Users/USER/OOGUI/app/src/main/res/drawable/parkin_logo.xml" value="0.131" />
         <entry key="..\:/Users/USER/OOGUI/app/src/main/res/layout/activity_login.xml" value="0.25" />
         <entry key="..\:/Users/USER/OOGUI/app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="..\:/Users/USER/OOGUI/app/src/main/res/layout/fragment_dashboard.xml" value="0.175" />
+        <entry key="..\:/Users/USER/OOGUI/app/src/main/res/layout/fragment_home.xml" value="0.175" />
+        <entry key="..\:/Users/USER/OOGUI/app/src/main/res/layout/historyresults.xml" value="0.175" />
+        <entry key="..\:/Users/USER/OOGUI/app/src/main/res/layout/notification.xml" value="0.175" />
         <entry key="..\:/androidPractice/MyApplication/app/src/main/res/layout/activity_login.xml" value="0.175" />
         <entry key="..\:/androidPractice/MyApplication/app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="..\:/androidPractice/MyApplication/app/src/main/res/layout/fragment_dashboard.xml" value="0.22" />
