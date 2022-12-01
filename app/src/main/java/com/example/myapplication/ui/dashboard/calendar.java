@@ -10,9 +10,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.myapplication.R;
 
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 
 public class calendar extends AppCompatActivity {
+    private HashMap<String, ResultMemento> resultList = new HashMap<>();
     CalendarView calendarView;
     TextView myDate;
     Button confirm;
@@ -36,8 +39,16 @@ public class calendar extends AppCompatActivity {
         myDate.setText(date);
 
         confirm.setOnClickListener(v -> {
+            GetData getData = null;
+            if(!resultList.containsKey(date)) {
+                getData = new GetData();
+                addMemento(date, getData.saveToMemento());
+
+            }
+            ResultMemento memento = getMemento(date);
             Intent intent = new Intent(calendar.this, watchHistory.class);
             intent.putExtra("date",date);
+            intent.putStringArrayListExtra("resultList", (ArrayList<String>) memento.getSavedState());
             startActivity(intent);
         });
 
@@ -49,5 +60,11 @@ public class calendar extends AppCompatActivity {
 
 
 
+    public void addMemento(String date, ResultMemento m) {
+        resultList.put(date, m);
+    }
 
+    public ResultMemento getMemento(String date) {
+        return resultList.get(date);
+    }
 }

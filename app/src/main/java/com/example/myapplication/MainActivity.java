@@ -39,7 +39,7 @@ import java.util.HashMap;
 public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "MainActivity";
-    private static final String JSON_URL = "http://172.20.10.2:3000/";
+    private static final String JSON_URL = "http://172.20.10.4:3000/api/courses";
     String date, year, month, result;
     int day;
     String dateString;
