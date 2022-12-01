@@ -24,108 +24,40 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class watchHistory extends AppCompatActivity {
 
 
     private ListView lv;
 
-    String date,year,month,result;
-    int day;
     String dateString;
-    private static final String JSON_URL = "http://172.20.10.2:3000/";
-    ArrayList<HashMap<String,String>> resultList;
+    List<String> resultList;
+
     @Override
     protected void onCreate(Bundle savedInstanceState)   {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.historyresults);
-
         Intent myIntent = getIntent();
         dateString = myIntent.getStringExtra("date");
 
-        resultList = new ArrayList<>();
+
         lv = findViewById(R.id.Listview);
-        GetData getData = new GetData();
-        getData.execute();
-    }
-
-    @SuppressLint("StaticFieldLeak")
-    public class GetData extends AsyncTask<String, String, String> {
-
-        @Override
-        protected String doInBackground(String... string){
-            StringBuilder current = new StringBuilder();
-            try {
-                URL url;
-                HttpURLConnection urlConnection = null;
-                try {
-                    url = new URL(JSON_URL);
-                    urlConnection = (HttpURLConnection) url.openConnection();
-
-                    InputStream in = urlConnection.getInputStream();
-                    InputStreamReader isr = new InputStreamReader(in);
-                    int data = isr.read();
-                    while (data != -1) {
-                        current.append((char) data);
-                        data = isr.read();
-
-                    }
-                    return current.toString();
-
-                } catch (IOException e) {
-                    e.printStackTrace();
-                } finally {
-                    if (urlConnection != null) {
-                        urlConnection.disconnect();
-                    }
-                }
-            }
-            catch(Exception e){
-                e.printStackTrace();
-            }
-            return current.toString();
+        resultList = myIntent.getStringArrayListExtra("resultList");
+        List<HashMap<String, String>> list = new ArrayList<>();
+        for(String result : resultList) {
+            HashMap<String, String> item = new HashMap<>();
+            item.put("result", result);
         }
-        @Override
-        protected void onPostExecute(String s){
-            try{
-                JSONObject jsonObject = new JSONObject(s);
-                JSONArray jsonArray = jsonObject.getJSONArray("parkinson");
-                for(int i = 0; i<jsonArray.length();i++){
-                    JSONObject jsonObject1 = jsonArray.getJSONObject(i);
-                    date = jsonObject1.getString("date");
-                    String[] parts = date.split("/");
-                    year = parts[0];
-                    month = parts[1];
-                    day = Integer.parseInt(parts[2]);
-                    result = jsonObject1.getString("result");
-                    Log.d("r",result);
-                    // Hashmap
-                    HashMap<String, String> resultAndDate = new HashMap<>();
-                    String d = year+"/"+month+"/"+day;
-                    Log.d("date",dateString);
-                    Log.d("dated",d);
-                    Log.d("dateString",dateString);
-                    if(d.equals(dateString)){
-                        Log.d("rss",result);
-                        resultAndDate.put("result",d + " "+ result);
-                        Log.d("susc","suscc");
-                        resultList.add(resultAndDate);
-                    }
-                }
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-
-            //Displaying the results
-            ListAdapter adapter = new SimpleAdapter(
-                    watchHistory.this,
-                    resultList,
-                    R.layout.historyresults,
-                    new String[] {"result"},
-                    new int[]{R.id.textView});
-            lv.setAdapter(adapter);
-            String str = resultList.toString();
-            Log.d("sus",str);
-        }
+        //Displaying the results
+        ListAdapter adapter = new SimpleAdapter(
+                watchHistory.this,
+                list,
+                R.layout.historyresults,
+                new String[] {"result"},
+                new int[]{R.id.textView});
+        lv.setAdapter(adapter);
+        String str = resultList.toString();
+        Log.d("sus",str);
     }
 }
