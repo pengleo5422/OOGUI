@@ -1,6 +1,5 @@
 package com.example.myapplication.ui.dashboard;
 
-import java.util.HashMap;
 import java.util.List;
 
 public class ResultMemento {
@@ -10,7 +9,7 @@ public class ResultMemento {
         this.result = result;
     }
 
-    public List<String> getSavedState() {
+    public List<String> getSavedResultList() {
         return result;
     }
 }
