@@ -39,16 +39,15 @@ public class calendar extends AppCompatActivity {
         myDate.setText(date);
 
         confirm.setOnClickListener(v -> {
-            GetData getData = null;
             if(!resultList.containsKey(date)) {
-                getData = new GetData();
-                addMemento(date, getData.saveToMemento());
-
+                GetResultData getResultData = new GetResultData(new json2());
+                getResultData.execute();
+                addMemento(date, getResultData.saveToMemento());
             }
             ResultMemento memento = getMemento(date);
             Intent intent = new Intent(calendar.this, watchHistory.class);
             intent.putExtra("date",date);
-            intent.putStringArrayListExtra("resultList", (ArrayList<String>) memento.getSavedState());
+            intent.putStringArrayListExtra("resultList", (ArrayList<String>)memento.getSavedResultList());
             startActivity(intent);
         });
 
@@ -57,9 +56,6 @@ public class calendar extends AppCompatActivity {
             myDate.setText(date);
         });
     }
-
-
-
     public void addMemento(String date, ResultMemento m) {
         resultList.put(date, m);
     }
