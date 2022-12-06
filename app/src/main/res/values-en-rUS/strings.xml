@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">ParkinBand</string>
+    <string name="account_lbl">Account</string>
+    <string name="login_lbl">Please enter account password to log in</string>
+    <string name="password_lbl">Password</string>
+    <string name="login">Login</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">History</string>
+    <string name="title_activity_historyclasss">History Class</string>
+    <string name="first_fragment_label">First fragment</string>
+    <string name="second_fragment_label">Second fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="title_activity_watch_history">Watch History</string>
+    <string name="sure">Sure</string>
+    <string name="date">Date</string>
+    <string name="sedate">Select Date</string>
+    <string name="result">Result</string>
+</resources>
