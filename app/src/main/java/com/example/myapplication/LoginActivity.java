@@ -16,7 +16,7 @@ public class LoginActivity extends AppCompatActivity {
     private final InputFilter filter = (source, start, end, dest, dstart, dend) -> {
 
         if (source != null && blockCharacterSet.contains(("" + source))) {
-            return "";
+            return "";///111111
         }
         return null;
     };
