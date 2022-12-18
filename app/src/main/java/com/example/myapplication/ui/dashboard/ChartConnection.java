@@ -10,7 +10,7 @@ import java.net.URL;
 
 public class ChartConnection implements Connection {
     private static final String TAG = "MainActivity";
-    private static final String JSON_URL = "http://192.168.50.4:3000/api/courses";
+    private static final String JSON_URL = "http://192.168.149.117:3000/api/courses";
 
     public String connect() {
         String current = "";
