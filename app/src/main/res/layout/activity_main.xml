@@ -7,13 +7,29 @@
     android:layout_height="match_parent"
     android:paddingTop="?attr/actionBarSize">
 
+    <TextView
+
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:text="本月分析"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        android:textStyle="bold"
+
+        tools:ignore="MissingConstraints" />
+
 
 
     <com.github.mikephil.charting.charts.LineChart
         android:id="@+id/linechart"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:layout_editor_absoluteY="56dp">
+        android:layout_height="400dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.45"
+        >
 
         <fragment
             android:id="@+id/nav_host_fragment_activity_main"
@@ -23,6 +39,7 @@
             app:defaultNavHost="true"
             app:navGraph="@navigation/mobile_navigation" />
     </com.github.mikephil.charting.charts.LineChart>
+
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/nav_view"
         android:layout_width="0dp"

@@ -1,5 +1,6 @@
 package com.example.myapplication;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -12,15 +13,22 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import com.example.myapplication.databinding.ActivityMainBinding;
+
 import com.example.myapplication.ui.dashboard.ChartConnection;
 import com.example.myapplication.ui.dashboard.Connection;
 import com.example.myapplication.ui.dashboard.GetData;
 import com.example.myapplication.ui.dashboard.calendar;
 import com.example.myapplication.ui.dashboard.watchHistory;
 import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.components.AxisBase;
+import com.github.mikephil.charting.components.Description;
+import com.github.mikephil.charting.components.Legend;
+import com.github.mikephil.charting.components.XAxis;
+import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
+import com.github.mikephil.charting.formatter.ValueFormatter;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 
 import org.json.JSONArray;
@@ -60,7 +68,12 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    @SuppressLint("StaticFieldLeak")
     private class GetChartData extends GetData {
+        public GetChartData(Connection c) {
+            super(c);
+        }
+
         String date, year, month, result;
         int day;
         int week1 = 0;
@@ -68,9 +81,7 @@ public class MainActivity extends AppCompatActivity {
         int week3 = 0;
         int week4 = 0;
         int week5 = 0;
-        public GetChartData(Connection c) {
-            super(c);
-        }
+
 
         @Override
         protected void onPostExecute(String s) {
@@ -113,17 +124,70 @@ public class MainActivity extends AppCompatActivity {
                 yValues.add(new Entry(3, week4));
                 //yValues.add(new Entry(4,week5));
                 LineDataSet set1 = new LineDataSet(yValues, "Data Set 1");
+
                 set1.setFillAlpha(110);
-                set1.setColor(Color.RED);
+                set1.setColor(Color.parseColor("#59bb9b"));
                 set1.setDrawFilled(true);
                 set1.setLineWidth(3f);
+                set1.setCircleColors(Color.parseColor("#59c1c9"));
+                set1.setMode(LineDataSet.Mode.HORIZONTAL_BEZIER);
+                set1.setValueTextSize(15);
+
+                set1.setValueTextColor(Color.parseColor("#59c1c9"));
+                set1.setCircleRadius(6);//圓點大小
+                set1.setDrawCircleHole(false);//圓點為實心
                 ArrayList<ILineDataSet> dataSets = new ArrayList<>();
                 dataSets.add(set1);
                 LineData data = new LineData(dataSets);
-                LineChart mChart = (LineChart) findViewById(R.id.linechart);
+
+                LineChart mChart = findViewById(R.id.linechart);
+                mChart.setDrawGridBackground(true);
+                mChart.setNoDataText("點擊獲取資料");
+                mChart.setDragEnabled(true);
+                mChart.setScaleEnabled(false);
+                mChart.setDrawBorders(false);//外框
+
+                XAxis xAxis = mChart.getXAxis();
+                xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
+                xAxis.setGranularity(1f);
+                xAxis.setAxisMinimum(0f);
+                xAxis.setDrawLabels(true);
+                xAxis.setDrawGridLines(false);
+                xAxis.setLabelCount(4, false);
+                ValueFormatter valueFormatter = new ValueFormatter() {
+                    private final String[] xLableList = new String[]{"第一周","第二周","第三周","第四周"};
+
+                    @Override
+                    public String getFormattedValue(float value) {
+                        if (value >= 0) {
+                            return xLableList[(int) value % xLableList.length];
+                        } else {
+                            return "";
+                        }
+                    }
+                };
+                xAxis.setValueFormatter(valueFormatter);
+                xAxis.setLabelRotationAngle(40);
+                xAxis.setTextColor(Color.parseColor("#59bb9b"));
+                xAxis.setTextSize(14);
+
+
+                YAxis yAxis = mChart.getAxisLeft();
+                YAxis rightYAxis = mChart.getAxisRight();
+                yAxis.setEnabled(true);
+                yAxis.setDrawGridLines(false);
+                yAxis.setTextColor(Color.parseColor("#59bb9b"));
+                rightYAxis.setEnabled(false);
+                Legend legend = mChart.getLegend();
+                legend.setEnabled(false);
+                Description description = new Description();
+                description.setEnabled(false);
+                mChart.setDescription(description);
+
                 mChart.setDragEnabled(true);
                 mChart.setScaleEnabled(false);
                 mChart.setData(data);
+                mChart.invalidate();
             } catch (JSONException e) {
                 e.printStackTrace();
             }
