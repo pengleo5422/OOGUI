@@ -18,8 +18,9 @@
             android:name=".ui.dashboard.watchHistory"
             android:exported="true"
             android:label="@string/title_activity_watch_history"
-            android:theme="@style/Theme.MyApplication.NoActionBar"
+
             />
+        <!--            android:theme="@style/Theme.MyApplication.NoActionBar"-->
         <activity
 
             android:name=".ui.dashboard.calendar"

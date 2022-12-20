@@ -6,21 +6,81 @@
     android:orientation="vertical"
     tools:context=".ui.dashboard.watchHistory">
 
+<!--    <TextView-->
+<!--        android:id="@+id/textView"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_gravity="center"-->
+<!--        android:layout_marginTop="10dp"-->
+<!--        android:text="@string/result"-->
+<!--        android:textAlignment="center"-->
+<!--        android:textColor="#59bb9b"-->
+<!--        android:textSize="35sp"-->
+<!--        android:textStyle="bold" />-->
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/textViewh"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="10dp"
-        android:text="@string/result"
+        android:text=""
         android:textAlignment="center"
         android:textColor="#59bb9b"
-        android:textSize="35sp"
+        android:textSize="30sp"
         android:textStyle="bold" />
 
-    <ListView
-        android:id="@+id/Listview"
+<!--    <ListView-->
+<!--        android:id="@+id/Listview"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent" />-->
+    <!--        android:textColor="#59bb9b"-->
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="50dp"
+        android:text="你擁有"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:text="0%"
+        android:textAlignment="center"
+        android:textColor="#59bb9b"
+        android:textSize="80sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="152dp"
+        android:layout_height="69dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:text="的機會擁有\n帕金森氏症"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/textView4"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:layout_marginTop="30dp"
+        android:text="請盡快聯繫\n專業的醫護人員\n來做更進一步的檢查"
+        android:textAlignment="center"
+        android:textColor="	#ff8080"
+        android:textSize="25sp"
+        android:textStyle="bold" />
+
 
 </LinearLayout>

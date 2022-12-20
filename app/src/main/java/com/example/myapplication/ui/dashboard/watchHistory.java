@@ -2,6 +2,7 @@ package com.example.myapplication.ui.dashboard;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ListAdapter;
@@ -21,7 +22,8 @@ public class watchHistory extends AppCompatActivity {
     private ListView lv;
     String dateString;
     String result;
-
+    TextView teh;
+    TextView te4;
     @Override
     protected void onCreate(Bundle savedInstanceState)   {
         super.onCreate(savedInstanceState);
@@ -30,22 +32,22 @@ public class watchHistory extends AppCompatActivity {
         Intent myIntent = getIntent();
         dateString = myIntent.getStringExtra("date");
 
-        lv = findViewById(R.id.Listview);
+
         result = myIntent.getStringExtra("result");
-        List<HashMap<String, String>> list = new ArrayList<>();
-        HashMap<String, String> item = new HashMap<>();
-        item.put("result", result);
-        list.add(item);
 
+        teh = findViewById(R.id.textViewh);
 
-        //Displaying the results
-        ListAdapter adapter = new SimpleAdapter(
-                watchHistory.this,
-                list,
-                R.layout.historyresults,
-                new String[] {"result"},
-                new int[]{R.id.textView});
-        lv.setAdapter(adapter);
+        te4 = findViewById(R.id.textView4);
+
+        if(result.equals("false")){
+            te4.setText("");
+            teh.setText("無異狀");
+            teh.setTextColor(Color.parseColor("#59bb9b"));
+        }else {
+            teh.setText(result);
+            teh.setTextColor(Color.parseColor("#ff8080"));
+        }
+
 
     }
 }

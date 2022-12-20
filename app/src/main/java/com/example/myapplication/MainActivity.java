@@ -102,7 +102,7 @@ public class MainActivity extends AppCompatActivity {
                     result = jsonObject1.getString("result");
 
                     // Hashmap
-                    if (result.equals("有異狀") && year.equals(thisYear) && month.equals(thisMonth)) {
+                    if (result.equals("true") && year.equals(thisYear) && month.equals(thisMonth)) {
                         if (1 <= day && day <= 7) {
                             week1 = week1 + 1;
                         } else if (8 <= day && day <= 14) {
