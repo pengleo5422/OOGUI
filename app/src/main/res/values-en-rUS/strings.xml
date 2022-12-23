@@ -19,4 +19,13 @@
     <string name="date">Date</string>
     <string name="sedate">Select Date</string>
     <string name="result">Result</string>
+    <string name="have">You Have a</string>
+    <string name="probability">0%</string>
+    <string name="have_parkin">chance of having\nParkinson\'s disease</string>
+    <string name="next_step_check">Please contact professional medical staff\nfor further examination as soon as possible</string>
+    <string name="next_step_check_n">No major abnormalities detected by the system\nYou have a lower chance of developing\n Parkinson\'s disease</string>
+    <string name="have_pro">Abnormal</string>
+    <string name="havet_pro">Normal</string>
+    <string name="No_data">No Data</string>
+    <string name="next_step_back">No records exist for this day\nPlease go back to the previous page to find other dates</string>
 </resources>

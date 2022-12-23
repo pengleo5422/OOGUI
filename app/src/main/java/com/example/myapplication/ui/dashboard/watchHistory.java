@@ -1,51 +1,56 @@
 package com.example.myapplication.ui.dashboard;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
-import android.widget.ListAdapter;
-import android.widget.ListView;
-import android.widget.SimpleAdapter;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.myapplication.R;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-
 public class watchHistory extends AppCompatActivity {
-    private ListView lv;
+
     String dateString;
     String result;
+    TextView teh;
+    TextView teg;
+    TextView tep;
+
 
     @Override
-    protected void onCreate(Bundle savedInstanceState)   {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.historyresults);
         Intent myIntent = getIntent();
         dateString = myIntent.getStringExtra("date");
 
-        lv = findViewById(R.id.Listview);
+
         result = myIntent.getStringExtra("result");
-        List<HashMap<String, String>> list = new ArrayList<>();
-        HashMap<String, String> item = new HashMap<>();
-        item.put("result", result);
-        list.add(item);
 
+        teh = findViewById(R.id.textViewhave);
 
-        //Displaying the results
-        ListAdapter adapter = new SimpleAdapter(
-                watchHistory.this,
-                list,
-                R.layout.historyresults,
-                new String[] {"result"},
-                new int[]{R.id.textView});
-        lv.setAdapter(adapter);
+        teg = findViewById(R.id.textViewgo);
+
+        tep = findViewById(R.id.textViewprobability);
+
+        if (result.equals("false")) {
+            teg.setText(getResources().getString(R.string.next_step_check_n));
+            teh.setText(getResources().getString(R.string.havet_pro));
+            teh.setTextColor(Color.parseColor("#59bb9b"));
+            teg.setTextColor(Color.parseColor("#59bb9b"));
+        } else if(result.equals("true")){
+            teh.setText(getResources().getString(R.string.have_pro));
+            teh.setTextColor(Color.parseColor("#ff8080"));
+            tep.setText("70%");
+            tep.setTextColor(Color.parseColor("#ff8080"));
+        }else{
+            teh.setText(getResources().getString(R.string.No_data));
+            teh.setTextColor(Color.parseColor("#59bb9b"));
+            teg.setText(getResources().getString(R.string.next_step_back));
+            tep.setText("?");
+        }
 
     }
 }

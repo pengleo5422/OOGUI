@@ -21,4 +21,13 @@
     <string name="sedate">選定日期:</string>
     <string name="result">結果</string>
     <string name="account_lbl">帳號</string>
+    <string name="have">你擁有</string>
+    <string name="probability">0%</string>
+    <string name="have_parkin">的機會擁有\n帕金森氏症</string>
+    <string name="next_step_check">請盡快聯繫\n專業的醫護人員\n來做更進一步的檢查</string>
+    <string name="next_step_check_n">系統沒偵測到重大異常\n你擁有較低的機率\n罹患帕金森式症</string>
+    <string name="have_pro">有異狀</string>
+    <string name="havet_pro">無異狀</string>
+    <string name="No_data">無資料</string>
+    <string name="next_step_back">這天並沒有記錄存在\n請返回上一頁查找其他日期</string>
 </resources>

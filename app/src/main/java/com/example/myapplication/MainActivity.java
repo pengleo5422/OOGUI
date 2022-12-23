@@ -39,7 +39,8 @@ import java.util.ArrayList;
 import java.util.Calendar;
 
 public class MainActivity extends AppCompatActivity {
-
+    Intent calendarIntent;
+    public static Intent mainIntent;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,8 +58,11 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupWithNavController(binding.navView, navController);
         navController.addOnDestinationChangedListener((navController1, navDestination, bundle) -> {
             if (navDestination.getId() == R.id.navigation_dashboard) {
-                Intent intent = new Intent(MainActivity.this, calendar.class);
-                startActivity(intent);
+                if (mainIntent == null)
+                    mainIntent = MainActivity.this.getIntent();
+                if (calendarIntent == null)
+                    calendarIntent = new Intent(MainActivity.this, calendar.class);
+                startActivity(calendarIntent);
             }
         });
     }
