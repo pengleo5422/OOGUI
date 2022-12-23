@@ -80,7 +80,7 @@ public class calendar extends AppCompatActivity {
         //Log.d("OuOb", resultMementoList.toString());
         confirm.setOnClickListener(v -> {
             if(!resultCareTaker.hasMemento(selectDate)) {
-                new GetResultData(new ResultConnection()).execute();
+                new GetResultData((Connection) new ChartConnection()).execute();
                 Log.d("OuOb", "getdata");
             } else {
                 ResultMemento memento = resultCareTaker.getMemento(selectDate);
@@ -99,7 +99,7 @@ public class calendar extends AppCompatActivity {
     }
 
     private class GetResultData extends GetData {
-        String result = "沒有紀錄";
+        boolean result ;
         String date, year, month;
         int day;
         public GetResultData(Connection c) {
@@ -109,19 +109,23 @@ public class calendar extends AppCompatActivity {
         @Override
         protected void onPostExecute(String s) {
             try {
-                JSONObject jsonObject = new JSONObject(s);
-                JSONArray jsonArray = jsonObject.getJSONArray("parkinson");
+                //JSONObject jsonObject = new JSONObject(s);
+                JSONArray jsonArray = new JSONArray(s);//jsonObject.getJSONArray("parkinson");
 
                 for (int i = 0; i < jsonArray.length(); i++) {
                     JSONObject jsonObject1 = jsonArray.getJSONObject(i);
                     date = jsonObject1.getString("date");
-                    String[] parts = date.split("/");
+                    String[] time = date.split("T");
+                    String[] parts = (time[0]).split("-");
                     year = parts[0];
                     month = parts[1];
                     day = Integer.parseInt(parts[2]);
+                    result = jsonObject1.getBoolean("result");
+                    day = Integer.parseInt(parts[2]);
                     String d = year + "/" + month + "/" + day;
+                    Log.d("ricky_test",jsonObject1.getString("result"));
                     if(selectDate.equals(d)) {
-                        result = jsonObject1.getString("result");
+                        result = jsonObject1.getBoolean("result");
                     }
                 }
             } catch (JSONException e) {

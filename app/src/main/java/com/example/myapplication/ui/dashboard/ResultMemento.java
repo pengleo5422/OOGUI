@@ -1,13 +1,13 @@
 package com.example.myapplication.ui.dashboard;
 
 public class ResultMemento {
-    private String result;
+    private boolean result;
 
-    public ResultMemento(String result) {
+    public ResultMemento(boolean result) {
         this.result = result;
     }
 
-    public String getSavedResult() {
+    public boolean getSavedResult() {
         return result;
     }
 }

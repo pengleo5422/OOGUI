@@ -4,6 +4,8 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.JsonReader;
+import android.util.Log;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -78,7 +80,8 @@ public class MainActivity extends AppCompatActivity {
             super(c);
         }
 
-        String date, year, month, result;
+        String date, year, month;
+        boolean result;
         int day;
         int week1 = 0;
         int week2 = 0;
@@ -93,20 +96,22 @@ public class MainActivity extends AppCompatActivity {
                 Calendar calendar = Calendar.getInstance();
                 String thisMonth = String.valueOf(calendar.get(Calendar.MONTH) + 1);
                 String thisYear = String.valueOf(calendar.get(Calendar.YEAR));
+                Log.e("a",s);
 
-                JSONObject jsonObject = new JSONObject(s);
-                JSONArray jsonArray = jsonObject.getJSONArray("parkinson");
+
+                JSONArray jsonArray = new JSONArray(s);
                 for (int i = 0; i < jsonArray.length(); i++) {
                     JSONObject jsonObject1 = jsonArray.getJSONObject(i);
                     date = jsonObject1.getString("date");
-                    String[] parts = date.split("/");
+                    String[] time = date.split("T");
+                    String[] parts = (time[0]).split("-");
                     year = parts[0];
                     month = parts[1];
                     day = Integer.parseInt(parts[2]);
-                    result = jsonObject1.getString("result");
+                    result = jsonObject1.getBoolean("result");
 
                     // Hashmap
-                    if (result.equals("有異狀") && year.equals(thisYear) && month.equals(thisMonth)) {
+                    if (result && year.equals(thisYear) && month.equals(thisMonth)) {
                         if (1 <= day && day <= 7) {
                             week1 = week1 + 1;
                         } else if (8 <= day && day <= 14) {

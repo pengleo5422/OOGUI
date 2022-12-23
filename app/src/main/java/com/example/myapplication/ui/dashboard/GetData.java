@@ -4,6 +4,8 @@ import android.annotation.SuppressLint;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import java.io.IOException;
+
 @SuppressLint("StaticFieldLeak")
 public abstract class GetData extends AsyncTask<Void, String, String> {
     Connection connection;
@@ -12,6 +14,11 @@ public abstract class GetData extends AsyncTask<Void, String, String> {
     }
     @Override
     protected String doInBackground(Void... params) {
-        return connection.connect();
+        try {
+            return connection.connect();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }

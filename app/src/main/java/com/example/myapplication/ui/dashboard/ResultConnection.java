@@ -8,37 +8,32 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+import okhttp3.FormBody;
+import okhttp3.MediaType;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
+import okhttp3.logging.HttpLoggingInterceptor;
+
 public class ResultConnection implements Connection {
-    private static final String JSON_URL = "http://192.168.149.117:3000/api/courses";
+    private static final String JSON_URL = "http://123.205.91.234:8080/db/findAll";
 
-    public String connect() {
-        StringBuilder current = new StringBuilder();
-        try {
-            URL url;
-            HttpURLConnection urlConnection = null;
-            try {
-                url = new URL(JSON_URL);
-                urlConnection = (HttpURLConnection) url.openConnection();
-
-                InputStream in = urlConnection.getInputStream();
-                InputStreamReader isr = new InputStreamReader(in);
-                int data = isr.read();
-                while (data != -1) {
-                    current.append((char) data);
-                    data = isr.read();
-                }
-                return current.toString();
-
-            } catch (IOException e) {
-                e.printStackTrace();
-            } finally {
-                if (urlConnection != null) {
-                    urlConnection.disconnect();
-                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return current.toString();
+    public String connect() throws IOException {
+        OkHttpClient client = new OkHttpClient().newBuilder()
+                .build();
+        MediaType mediaType = MediaType.parse("application/json");
+        RequestBody body =new FormBody.Builder()
+                .add("account","test@gmail.com")
+                .add("message","2022-11-28")
+                .build();
+        Request request = new Request.Builder()
+                .url(JSON_URL)
+                .method("POST",body)
+                .addHeader("Content-Type", "application/json")
+                .build();
+        Response response = client.newCall(request).execute();
+        Log.e("a",body.toString());
+        return response.toString();
     }
 }

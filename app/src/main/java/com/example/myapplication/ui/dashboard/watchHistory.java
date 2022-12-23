@@ -12,7 +12,7 @@ import com.example.myapplication.R;
 public class watchHistory extends AppCompatActivity {
 
     String dateString;
-    String result;
+    boolean result;
     TextView teh;
     TextView teg;
     TextView tep;
@@ -27,7 +27,7 @@ public class watchHistory extends AppCompatActivity {
         dateString = myIntent.getStringExtra("date");
 
 
-        result = myIntent.getStringExtra("result");
+        result = myIntent.getBooleanExtra("result",false);
 
         teh = findViewById(R.id.textViewhave);
 
@@ -35,12 +35,12 @@ public class watchHistory extends AppCompatActivity {
 
         tep = findViewById(R.id.textViewprobability);
 
-        if (result.equals("false")) {
+        if (!result) {
             teg.setText(getResources().getString(R.string.next_step_check_n));
             teh.setText(getResources().getString(R.string.havet_pro));
             teh.setTextColor(Color.parseColor("#59bb9b"));
             teg.setTextColor(Color.parseColor("#59bb9b"));
-        } else if(result.equals("true")){
+        } else if(result){
             teh.setText(getResources().getString(R.string.have_pro));
             teh.setTextColor(Color.parseColor("#ff8080"));
             tep.setText("70%");

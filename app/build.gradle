@@ -32,6 +32,8 @@ android {
 }
 
 dependencies {
+    implementation 'com.squareup.okhttp3:logging-interceptor:3.8.1'
+    implementation 'com.squareup.okhttp3:okhttp:3.8.1'
     implementation 'com.google.firebase:firebase-analytics'
     implementation platform('com.google.firebase:firebase-bom:30.1.0')
     implementation 'com.androidplot:androidplot-core:1.5.7'
